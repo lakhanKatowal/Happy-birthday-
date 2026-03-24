@@ -1,0 +1,125 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html>
+<head>
+  <title>Birthday Wish</title>
+  <style>
+    body {
+      background-color: #0000FF;
+      text-align: center;
+      font-family:Algerian;
+      margin: 0;
+      overflow: hidden;
+    }
+    .balloon {
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      bottom: -70px;
+      animation: float 5s ease-in-out infinite, ascend 10s linear forwards;
+      cursor: pointer;
+      z-index: 1;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(-10px); }
+    }
+    @keyframes ascend {
+      to { bottom: 110vh; }
+    }
+    #wish {
+      font-size: 40px;
+      color: greenyellow;
+      text-shadow: 2px 2px pink;
+      cursor: pointer;
+      margin-top: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    #message {
+      font-size: 30px;
+      color: lightgreen;
+      margin-top: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .snowflake {
+      position: absolute;
+      color: white;
+      font-size: 20px;
+      animation: twinkle 2s infinite;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+  </style>
+</head>
+<body>
+  <h1 id="wish" onclick="startBalloons()">Happy Birthday My Dear Gundi 😘🥰💝 click me</h1>
+  <div id="balloonContainer"></div>
+  <div id="message"></div>
+  <script>
+    const hearts = ['❤️', '💓', '💗', '💖', '💝', '💘'];
+    const colors = ['red', 'blue', 'green', 'purple', 'orange', 'pink'];
+    const container = document.getElementById('balloonContainer');
+    let balloonInterval;
+    let balloonCount = 0;
+
+    function startBalloons() {
+      balloonInterval = setInterval(createBalloon, 500);
+      setTimeout(() => clearInterval(balloonInterval), 300000); // stop after 5 minutes
+      createSnowflakes();
+    }
+
+    function createBalloon() {
+      const balloon = document.createElement('div');
+      balloon.classList.add('balloon');
+      const heart = hearts[Math.floor(Math.random() * hearts.length)];
+      balloon.innerHTML = heart;
+      balloon.style.color = colors[Math.floor(Math.random() * colors.length)];
+      balloon.style.left = Math.random() * (window.innerWidth - 50) + 'px';
+      balloon.style.fontSize = '50px';
+      balloon.onclick = function() { popBalloon(balloon); };
+      container.appendChild(balloon);
+      balloonCount++;
+      setTimeout(() => {
+        if (balloon.parentNode) { balloon.parentNode.removeChild(balloon); balloonCount--; }
+      }, 10000);
+    }
+
+    function popBalloon(balloon) {
+      balloon.style.color = 'transparent';
+      balloon.style.animation = 'none';
+      balloon.style.transform = 'scale(1.2)';
+      setTimeout(() => {
+        if (balloon.parentNode) { balloon.parentNode.removeChild(balloon); balloonCount--; }
+      }, 300);
+      document.getElementById('message').textContent = 'I love you my wife😘😘';
+      setTimeout(() => {
+        document.getElementById('message').textContent = 'Dear Gundi I wish you a very  Happy Birthday to youGod bless you! Every dreams and aims become true😘 I love you very very much😘😘 You are the one I want , You are the teacher who teached to live a love life , You are the one of precious person in my life  😘 Thank you for making my life such a beautiful one and Thanks a lot for coming to my life😘🥰💝 ';
+      }, 3000);
+    }
+
+    function createSnowflakes() {
+      for (let i = 0; i < 100; i++) {
+        const snowflake = document.createElement('div');
+        snowflake.classList.add('snowflake');
+        snowflake.innerHTML = '❄️';
+        snowflake.style.left = Math.random() * window.innerWidth + 'px';
+        snowflake.style.top = Math.random() * window.innerHeight + 'px';
+        snowflake.style.animationDuration = Math.random() * 2 + 1 + 's';
+        snowflake.style.animationDelay = Math.random() * 2 + 's';
+        document.body.appendChild(snowflake);
+      }
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
